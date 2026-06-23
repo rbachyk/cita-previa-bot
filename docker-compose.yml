@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  bot:
+    build: .
+    env_file: .env
+    environment:
+      # Override local dev setting — always headless inside the container
+      BROWSER_HEADLESS: "true"
+      BROWSER_SLOW_MO: "0"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      # Passes as long as the heartbeat file was touched within the last 15 minutes
+      test: >
+        CMD-SHELL
+        [ $(( $(date +%s) - $(stat -c %Y /tmp/cita_previa_heartbeat 2>/dev/null || echo 0) )) -lt 900 ]
+      interval: 5m
+      timeout: 10s
+      retries: 3
+      start_period: 3m

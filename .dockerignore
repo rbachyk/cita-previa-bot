@@ -1,0 +1,9 @@
+.venv/
+.env
+__pycache__/
+*.py[cod]
+data/cita_previa.db
+data/discovery/
+.git/
+.gitignore
+README.md

@@ -1,0 +1,12 @@
+[project]
+name = "cita-previa-bot"
+version = "0.1.0"
+description = "Monitoring-only bot for the Spanish ICPPlus cita previa system"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "playwright==1.44.0",
+    "python-telegram-bot==21.3",
+    "python-dotenv==1.0.1",
+    "aiofiles==23.2.1",
+]

@@ -38,7 +38,7 @@ async def _walk_wizard(page: Page) -> str:
     """Navigate all wizard steps; return body text of the final result page."""
 
     # Step 0 — province selection
-    await page.goto(ICPPLUS_URL, wait_until="networkidle")
+    await page.goto(ICPPLUS_URL, wait_until="domcontentloaded")
     await page.wait_for_selector("#form", timeout=STEP_TIMEOUT)
     await page.select_option("#form", value=PROVINCE_URL_PATH)
     await page.click("#btnAceptar")

@@ -39,7 +39,13 @@ async def _walk_wizard(page: Page) -> str:
 
     # Step 0 — province selection
     await page.goto(ICPPLUS_URL, wait_until="domcontentloaded")
-    await page.wait_for_selector("#form", timeout=STEP_TIMEOUT)
+    try:
+        await page.wait_for_selector("#form", timeout=STEP_TIMEOUT)
+    except PlaywrightTimeout:
+        html = await page.content()
+        print(f"[checker] DEBUG url={page.url!r}")
+        print(f"[checker] DEBUG html={html[:1000]!r}")
+        raise
     await page.select_option("#form", value=PROVINCE_URL_PATH)
     await page.click("#btnAceptar")
     await page.wait_for_load_state("domcontentloaded")

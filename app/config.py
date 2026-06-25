@@ -15,7 +15,7 @@ BROWSER_SLOW_MO: int = int(os.getenv("BROWSER_SLOW_MO", "50"))
 DB_PATH: Path = BASE_DIR / os.getenv("DB_PATH", "data/cita_previa.db")
 DISCOVERY_DIR: Path = BASE_DIR / os.getenv("DISCOVERY_DIR", "data/discovery")
 
-ICPPLUS_URL = "https://sede.administracionespublicas.gob.es/pagina/index/directorio/icpplus"
+ICPPLUS_URL = "https://icp.administracionelectronica.gob.es/icpplus/index.html"
 
 # Checker settings — pre-filled with the Alicante / Ukraine TIE flow from discovery
 PROVINCE_URL_PATH: str = os.getenv("PROVINCE_URL_PATH", "/icpco/citar?p=3&locale=es")

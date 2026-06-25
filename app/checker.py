@@ -29,7 +29,7 @@ from app.telegram_bot import send_message
 
 NO_SLOTS_MARKER = "no hay citas disponibles"
 CAPTCHA_MARKER = "captcha"
-STEP_TIMEOUT = 15_000  # ms
+STEP_TIMEOUT = 30_000  # ms
 
 _HEARTBEAT = Path("/tmp/cita_previa_heartbeat")
 
@@ -38,14 +38,8 @@ async def _walk_wizard(page: Page) -> str:
     """Navigate all wizard steps; return body text of the final result page."""
 
     # Step 0 — province selection
-    await page.goto(ICPPLUS_URL, wait_until="domcontentloaded")
-    try:
-        await page.wait_for_selector("#form", timeout=STEP_TIMEOUT)
-    except PlaywrightTimeout:
-        html = await page.content()
-        print(f"[checker] DEBUG url={page.url!r}")
-        print(f"[checker] DEBUG html={html[:1000]!r}")
-        raise
+    await page.goto(ICPPLUS_URL, wait_until="networkidle")
+    await page.wait_for_selector("#form", timeout=STEP_TIMEOUT)
     await page.select_option("#form", value=PROVINCE_URL_PATH)
     await page.click("#btnAceptar")
     await page.wait_for_load_state("domcontentloaded")

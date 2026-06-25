@@ -29,8 +29,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxfixes3 \
     libxkbcommon0 \
     libxrandr2 \
-    libpango-1.0-0t64 \
-    libcairo2t64 \
+    libpango-1.0-0 \
+    libcairo2 \
     fonts-liberation \
     fonts-unifont \
     && rm -rf /var/lib/apt/lists/*

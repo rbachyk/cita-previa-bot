@@ -82,7 +82,11 @@ async def check_once() -> dict:
     result: dict = {"slots_available": False, "status": "unknown", "snippet": ""}
     try:
         async with async_playwright() as pw:
-            browser = await pw.chromium.launch(headless=True, slow_mo=BROWSER_SLOW_MO)
+            browser = await pw.chromium.launch(
+                headless=True,
+                slow_mo=BROWSER_SLOW_MO,
+                args=["--no-sandbox", "--disable-setuid-sandbox"],
+            )
             context = await browser.new_context(locale="es-ES")
             page = await context.new_page()
             body_text = await _walk_wizard(page)

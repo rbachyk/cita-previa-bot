@@ -8,3 +8,5 @@ build/
 venv/
 data/cita_previa.db
 data/discovery/
+.DS_Store
+**/.DS_Store
